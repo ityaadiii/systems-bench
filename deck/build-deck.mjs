@@ -24,6 +24,7 @@ const html = readFileSync(join(ROOT,'deck/deck.html'),'utf8')
   .replace('__JS__', js);
 
 writeFileSync(join(ROOT,'deck/out.html'), html);
+writeFileSync(join(ROOT,'docs/index.html'), html);   // GitHub Pages serves the deck
 writeFileSync(join(process.env.HOME,'Desktop','Systems Bench - deck.html'), html);
 const style = html.slice(html.indexOf('<style>'), html.indexOf('</style>')+8);
 const body  = html.slice(html.indexOf('<body>')+6, html.lastIndexOf('</body>'));

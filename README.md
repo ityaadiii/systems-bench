@@ -22,10 +22,11 @@ machinery it actually takes to show the work paid off.
 None can be graded item by item, and bringing that toolkit to them does not give a
 worse number. It gives a confident number about the wrong quantity.
 
-## Read it
+## The deck
 
-- **[Case study](https://ityaadiii.github.io/systems-bench/)** — the full argument, every chart, every caveat
-- **[Deck](https://ityaadiii.github.io/systems-bench/deck.html)** — 29 slides, arrow keys to advance
+**[ityaadiii.github.io/systems-bench](https://ityaadiii.github.io/systems-bench/)** — 29 slides.
+Arrow keys or click to advance. Every chart in it is generated from a real run of the
+code in this repo, not drawn.
 
 ## Run it
 
