@@ -5,3 +5,9 @@ runs/*/attempts.jsonl
 *.log
 runs/
 .cache/
+.DS_Store
+**/.DS_Store
+.agents/
+.claude/
+.impeccable/
+skills-lock.json
