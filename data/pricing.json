@@ -1,0 +1,13 @@
+{
+  "_README": "Prices move. Every entry carries the date it was last checked and the page it was checked against. report/build.ts prints the oldest verifiedOn on the grid and warns above 30 days, because a cost-per-resolved-unit table quoting stale prices is worse than one quoting none. Entries below are PLACEHOLDERS seeded to make the harness runnable — verify each against the provider's own pricing page before showing this to anyone, then set verified to true.",
+  "usdInr": { "rate": 88, "verifiedOn": "2026-08-30", "note": "Set to your own treasury rate. Every INR figure scales linearly with this." },
+  "models": [
+    { "key": "anthropic:sonnet",  "usdPerMTokIn": 3.00,  "usdPerMTokOut": 15.00, "verifiedOn": null, "verified": false, "source": "https://www.anthropic.com/pricing" },
+    { "key": "anthropic:haiku",   "usdPerMTokIn": 0.80,  "usdPerMTokOut": 4.00,  "verifiedOn": null, "verified": false, "source": "https://www.anthropic.com/pricing" },
+    { "key": "openai:mini",       "usdPerMTokIn": 0.15,  "usdPerMTokOut": 0.60,  "verifiedOn": null, "verified": false, "source": "https://openai.com/api/pricing/" },
+    { "key": "openai:flagship",   "usdPerMTokIn": 2.50,  "usdPerMTokOut": 10.00, "verifiedOn": null, "verified": false, "source": "https://openai.com/api/pricing/" },
+    { "key": "google:flash",      "usdPerMTokIn": 0.075, "usdPerMTokOut": 0.30,  "verifiedOn": null, "verified": false, "source": "https://ai.google.dev/pricing" },
+    { "key": "google:pro",        "usdPerMTokIn": 1.25,  "usdPerMTokOut": 5.00,  "verifiedOn": null, "verified": false, "source": "https://ai.google.dev/pricing" },
+    { "key": "ollama:local",      "usdPerMTokIn": 0,     "usdPerMTokOut": 0,     "verifiedOn": "2026-08-30", "verified": true, "source": "local inference; set non-zero to amortise GPU + power" }
+  ]
+}

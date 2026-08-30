@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Does this workload need a lab at all?</title>
+<meta name="description" content="A partner bench: scoring AI labs per workload on the dimensions that decide whether a deployment makes money. Aditi Singh.">
+<style>__CSS__</style>
+</head>
+<body>
+<!--
+THESIS: One page that refuses the leaderboard arrangement. A leaderboard ranks models; this
+  prices deployments, and opens by asking whether the workload needs a model at all.
+OWN-WORLD: The Ledger. Bone paper #f1f0eb under graph rule and grain, ink #101013, Klein blue
+  #1f3fff spent only on live measurement. Archivo 900 uppercase display, Fraunces italic for the
+  one aside per band, tabular mono for every figure. 2px full-bleed ink rules divide bands; no
+  cards, no eyebrows, no shadows.
+STORY: A founder arrives asking which lab to buy. He leaves knowing the first question is whether
+  the workload needs one, having moved the dial himself and watched a no-model baseline hold at
+  92% coverage while both models hold at nothing.
+FIRST VIEWPORT: The wrong question in Archivo 900 at 6rem, struck through in Klein blue. The real
+  question beneath it. Directly under, above the fold, the instrument: a threshold dial already
+  answering, four figures live, the error budget drawn as a red rule the curve must stay under.
+FORM: The Instrument. Position 4 of 7 on the ordered list; seed key 66e560cc.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+<a class="skip" href="#instrument">Skip to the instrument</a>
+
+<header class="band hero">
+  <div class="shell">
+    <h1 class="display">
+      <span class="strike">Which lab should we use?</span>
+    </h1>
+    <p class="realq display">Does this workload need a lab <em>at all?</em></p>
+    <div class="herometa">
+      <p class="story">Most enterprise AI spending answers the first question. Almost nobody measures the second.</p>
+      <dl class="facts">
+        <div><dt>Workload</dt><dd>Indian address to serviceability</dd></div>
+        <div><dt>Evaluated</dt><dd><span class="num">400</span> items, <span class="num">3</span> columns</dd></div>
+        <div><dt>Spend</dt><dd><span class="num">&#8377;0</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="instrument">
+  <div class="shell">
+    <h2 class="display sec">Pull the threshold.</h2>
+    <p class="lede">Every answer arrives with a confidence. Set the level above which you let answers through untouched, and everything below it goes to a human. This is the only decision that matters in a deployment, and it is the one no benchmark reports.</p>
+
+    <div class="rig" data-rig>
+      <div class="rigcols">
+        <button class="col" data-col="baseline:gazetteer" aria-pressed="true"><b>Gazetteer</b><i>no model</i></button>
+        <button class="col" data-col="ollama:qwen2.5:7b-instruct" aria-pressed="false"><b>qwen2.5 7b</b><i>local</i></button>
+        <button class="col" data-col="ollama:qwen3:8b" aria-pressed="false"><b>qwen3 8b</b><i>local</i></button>
+      </div>
+
+      <div class="rigmain">
+        <div class="dialwrap">
+          <label class="dlabel" for="thr">Auto-approve above confidence</label>
+          <output class="dval num" id="thrOut" for="thr">0.79</output>
+          <input id="thr" type="range" min="0" max="100" value="79" step="1" aria-describedby="thrHelp">
+          <p class="dhelp" id="thrHelp">Drag, or use the arrow keys.</p>
+        </div>
+
+        <figure class="curvefig">
+          <svg viewBox="0 0 640 300" role="img" aria-labelledby="curveTitle curveDesc" class="curve">
+            <title id="curveTitle">Escaped errors against coverage</title>
+            <desc id="curveDesc">As more answers are auto-approved, the error rate among them rises. The dashed rule is the two percent error budget. The marker shows the current threshold.</desc>
+            <g data-curve></g>
+          </svg>
+          <figcaption>Horizontal: share auto-approved. Vertical: error rate among what was let through. The dashed rule is the <span class="num">2%</span> budget. Shaded band is the 95% interval, and the gate is judged on its upper edge, so it under-promises.</figcaption>
+        </figure>
+      </div>
+
+      <div class="readout">
+        <div class="ro"><dt>Auto-approved</dt><dd class="num big" data-out="cov">&#8212;</dd></div>
+        <div class="ro"><dt>Errors escaping</dt><dd class="num big" data-out="esc">&#8212;</dd></div>
+        <div class="ro"><dt>Human hours left</dt><dd class="num big" data-out="hrs">&#8212;</dd></div>
+        <div class="ro"><dt>Cost per month</dt><dd class="num big" data-out="cost">&#8212;</dd></div>
+      </div>
+      <p class="verdict" data-out="verdict"></p>
+      <noscript><p class="verdict ns">Without scripting the dial is inert, so here is the answer it settles on: the gazetteer auto-approves <b>92%</b> of this workload with <b>zero</b> escaped errors, at <b>&#8377;25,836</b> a month against <b>&#8377;2.98 lakh</b> done by hand. Neither model reaches any threshold that holds.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell narrow">
+    <h2 class="display sec">A model at 92% accuracy does not remove 92% of the work.</h2>
+    <p>If you cannot tell <em>which</em> 8% are wrong, you review all of it. You have added a system on top of the humans and removed almost nothing. That is the mechanical reason most enterprise pilots return nothing: not bad models, unusable outputs.</p>
+    <p>So two properties are needed, and they are constantly confused.</p>
+    <div class="pair">
+      <div><h3>Calibration</h3><p>When it says 0.9, is it right 90% of the time?</p></div>
+      <div><h3>Resolution</h3><p>Does the number vary with whether it is actually right?</p></div>
+    </div>
+    <p class="story big">A model that says 0.87 on every item and is right 87% of the time is perfectly calibrated and completely useless. There is no threshold that separates anything. Report calibration alone and you would call it excellent.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2 class="display sec">What the three columns actually cost.</h2>
+    <p class="lede">Same 266 held-out items, same error budget, same gate. Accuracy carries a 95% Wilson interval.</p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Results by column, scrolls horizontally">
+      <table class="grid">
+        <thead><tr><th class="l">Column</th><th>Accuracy</th><th>Ranking</th><th>p95</th><th>Automatable</th><th>Escaping</th><th>Per month</th></tr></thead>
+        <tbody data-grid></tbody>
+      </table>
+    </div>
+    <p class="foot">Ranking is area under the risk-coverage curve, lower better. It rewards a model for knowing when it is wrong, which accuracy cannot see.</p>
+
+    <div class="split">
+      <div>
+        <h3 class="display sub">What is real, and what is not.</h3>
+        <p class="lede">Paired McNemar on identical items, Holm-corrected across all three comparisons.</p>
+        <table class="cmp"><tbody data-cmp></tbody></table>
+        <p class="foot">At <span class="num">n=60</span> the gap between the two models read as noise. At <span class="num">n=400</span> the same gap reads as real. Same models. The sample size was the whole difference.</p>
+      </div>
+      <div>
+        <h3 class="display sub">Read the baseline carefully.</h3>
+        <p>The gazetteer holds the same postal directory these items were generated from. That is realistic, since India Post publishes it and any deployment would have it, but it means this is a lookup measured against models given no reference data at all. It is not lookup against retrieval.</p>
+        <p class="story">Which makes the honest claim the stronger one: a prompt-only model is the wrong tool for a lookup. That is an argument about architecture, not about model quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band dark">
+  <div class="shell narrow">
+    <h2 class="display sec">Then it caught me, eight times.</h2>
+    <p>A bench that only reports what worked is a brochure. This one is unit-tested against its own failure modes, and the tests kept finding mine. Three surfaced only when the simulated providers were replaced with real ones.</p>
+    <ol class="defects" data-defects></ol>
+    <p class="story big">Three of the eight all pointed the same way, toward the conclusion the bench was built to argue for. That is what makes the class dangerous. The errors were not random, they flattered the thesis, and each fix left the next one standing.</p>
+    <p>Corrected, the finding reversed. The cheapest design contains no model at all, and every composition that adds one ties or costs more.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell narrow close">
+    <h2 class="display sec">What this is for.</h2>
+    <p>You named three priorities for the first ninety days. Partnerships was the one with engineering inside it, and you had already said that at the end it is execution. This is that sentence made measurable.</p>
+    <p class="story big">It turns a partnership conversation from asking into trading. Not <em>we would love some credits</em>, but <em>here is your model&#8217;s measured position on our workloads, and here is what we would need to see to route more volume to you</em>.</p>
+    <p>The numbers on this page are a demonstration on synthetic workloads. The harness is the artefact. Pointed at three real deployments, the grid stops being a demo and becomes a negotiating position.</p>
+    <dl class="facts wide">
+      <div><dt>Built</dt><dd><span class="num">4,889</span> lines of TypeScript, <span class="num">408</span> of tests</dd></div>
+      <div><dt>Dependencies</dt><dd><span class="num">0</span></dd></div>
+      <div><dt>Tests</dt><dd><span class="num">40</span>, several against textbook values</dd></div>
+      <div><dt>Spend</dt><dd><span class="num">&#8377;0</span>, run on a laptop</dd></div>
+    </dl>
+    <p class="sig">Aditi Singh</p>
+  </div>
+</section>
+
+<script>__JS__</script>
+</body>
+</html>

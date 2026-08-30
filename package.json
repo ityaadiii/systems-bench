@@ -1,0 +1,12 @@
+{
+  "name": "systems-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Four business archetypes, four evaluation machines. Three of the four cannot be graded the way the industry grades things.",
+  "engines": { "node": ">=22.6" },
+  "scripts": {
+    "bench": "node bench.ts",
+    "test": "node --test src/core/*.test.ts"
+  }
+}

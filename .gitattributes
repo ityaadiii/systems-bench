@@ -1,0 +1,4 @@
+
+docs/*.html linguist-vendored
+case2/out.html linguist-vendored
+deck/out.html linguist-vendored
