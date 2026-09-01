@@ -1,4 +1,9 @@
-
-docs/*.html linguist-vendored
-case2/out.html linguist-vendored
-deck/out.html linguist-vendored
+# The bench is bench.ts and src/. Everything listed here renders the report,
+# the case study and the deck, so it should not count toward the language
+# statistics. Without this the repo reads as an HTML project.
+docs/**             linguist-documentation
+case/**             linguist-vendored
+case2/**            linguist-vendored
+deck/**             linguist-vendored
+shared-charts.js    linguist-vendored
+runs/**             linguist-generated
